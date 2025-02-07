@@ -11,37 +11,34 @@ questions.forEach((q, index) => {
     q.style.display = index === 0 ? "flex" : "none";
 });
 
-// Fonction pour réinitialiser la couleur des versets et cacher le texte
+// Fonction pour réinitialiser la couleur des versets
 function resetVersesColor() {
     verses.forEach((verse) => {
         verse.style.backgroundColor = ""; // Remet la couleur d'origine définie en CSS
-        verse.setAttribute("data-open", "false"); // Cache le texte au reset
-        const textDiv = verse.querySelector(".text");
-        if (textDiv) textDiv.style.display = "none";
     });
 }
 
 verses.forEach((verse) => {
   verse.addEventListener("click", function () {
       const verseQuestion = parseInt(this.getAttribute("data-question"));
-      const textDiv = this.querySelector(".text");
 
-      if (!this.hasAttribute("data-colored")) {
-          // **Premier clic → Change uniquement la couleur**
-          if (verseQuestion === currentIndex) {
-              this.style.backgroundColor = "rgb(155, 230, 177)"; // Bonne réponse (vert)
-          } else {
-              this.style.backgroundColor = "rgb(230, 104, 93)"; // Mauvaise réponse (rouge)
+      // Vérifie si le verset est lié à la question actuelle
+      if (verseQuestion === currentIndex) {
+          this.style.backgroundColor = "#9BE6B1"; // Nouvelle couleur verte
+      } else {
+          this.style.backgroundColor = "#E6685D"; // Nouvelle couleur rouge
+      }
+
+      // Vérifie si la couleur du verset a changé
+      const bgColor = this.style.backgroundColor;
+      if (bgColor === "rgb(155, 230, 177)" || bgColor === "rgb(230, 104, 93)") {
+          const textDiv = this.querySelector(".text"); // Récupère l'élément .text
+          if (textDiv) {
+              textDiv.style.display = textDiv.style.display === "none" ? "block" : "none"; // Affiche ou cache le texte
           }
-          this.setAttribute("data-colored", "true"); // Marque comme coloré
-      } else if (textDiv) {
-          // **Deuxième clic → Affiche ou cache le texte**
-          textDiv.style.display = textDiv.style.display === "none" ? "block" : "none";
       }
   });
 });
-
-
 
 
 // Fonction pour obtenir un index aléatoire différent de l'actuel
@@ -58,7 +55,7 @@ button2.addEventListener("click", function () {
     questions[currentIndex].style.display = "none"; // Cacher l'actuelle
     currentIndex = getRandomIndex(); // Obtenir un index aléatoire
     questions[currentIndex].style.display = "flex"; // Afficher la nouvelle
-    resetVersesColor(); // Réinitialiser les couleurs et cacher le texte
+    resetVersesColor(); // Réinitialiser les couleurs
 });
 
 // Bouton pour reculer (vers une autre question aléatoire)
@@ -66,5 +63,5 @@ button1.addEventListener("click", function () {
     questions[currentIndex].style.display = "none"; // Cacher l'actuelle
     currentIndex = getRandomIndex(); // Obtenir un index aléatoire
     questions[currentIndex].style.display = "flex"; // Afficher la nouvelle
-    resetVersesColor(); // Réinitialiser les couleurs et cacher le texte
+    resetVersesColor(); // Réinitialiser les couleurs
 });
