@@ -1,5 +1,5 @@
 body {
-  background-color: #b5cae0;
+  background-color: whitesmoke;
 }
 
 .container,
@@ -27,6 +27,12 @@ h1 {
   overflow: hidden;
 }
 
+@media(max-width:768px){
+  .navbar{
+    height: 10vh;
+  }
+}
+
 .navbar .button1,
 .navbar .button2
  {
@@ -35,6 +41,13 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+@media(max-width:768px){
+  .navbar .button1,
+.navbar .button2{
+    height: 10vh;
+  }
 }
 
 .navbar .button1{
@@ -70,9 +83,10 @@ display: flex;
   align-items: center;
   background-color: #e0d1b6;
   width: 90vw;
-  height: 10vh;
+  height: auto;
   flex-direction: column;
   padding: 10px;
+  border-radius: 10px;
 }
 
 .verse > .text {

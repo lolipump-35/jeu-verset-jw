@@ -24,14 +24,14 @@ verses.forEach((verse) => {
   
       // Vérifie si le verset est lié à la question actuelle
       if (verseQuestion === currentIndex) {
-        this.style.backgroundColor = "green"; // Bonne réponse
+        this.style.backgroundColor = "#9BE6B1"; // Bonne réponse
       } else {
-        this.style.backgroundColor = "red"; // Mauvaise réponse
+        this.style.backgroundColor = "#E6685D"; // Mauvaise réponse
       }
   
       // Vérifie si la couleur du verset a changé
       const bgColor = this.style.backgroundColor;
-      if (bgColor === "green" || bgColor === "red") {
+      if (bgColor === "#9BE6B1" || bgColor === "#E6685D") {
         const textDiv = this.querySelector(".text"); // Récupère l'élément .text
         if (textDiv) {
           textDiv.style.display = textDiv.style.display === "none" ? "block" : "none"; // Affiche ou cache le texte
@@ -41,22 +41,27 @@ verses.forEach((verse) => {
   });
   
 
-// Bouton pour avancer
+// Fonction pour obtenir un index aléatoire différent de l'actuel
+function getRandomIndex() {
+  let newIndex;
+  do {
+      newIndex = Math.floor(Math.random() * 34); // Nombre entre 0 et 33
+  } while (newIndex === currentIndex); // Empêcher de rester sur le même index
+  return newIndex;
+}
+
+// Bouton pour avancer (vers une question aléatoire)
 button2.addEventListener("click", function () {
-    if (currentIndex < questions.length - 1) {
-        questions[currentIndex].style.display = "none"; // Cacher l'actuelle
-        currentIndex++; // Aller à la suivante
-        questions[currentIndex].style.display = "flex"; // Afficher la suivante
-        resetVersesColor(); // Réinitialiser les couleurs
-    }
+  questions[currentIndex].style.display = "none"; // Cacher l'actuelle
+  currentIndex = getRandomIndex(); // Obtenir un index aléatoire
+  questions[currentIndex].style.display = "flex"; // Afficher la nouvelle
+  resetVersesColor(); // Réinitialiser les couleurs
 });
 
-// Bouton pour reculer
+// Bouton pour reculer (vers une autre question aléatoire)
 button1.addEventListener("click", function () {
-    if (currentIndex > 0) {
-        questions[currentIndex].style.display = "none"; // Cacher l'actuelle
-        currentIndex--; // Aller à la précédente
-        questions[currentIndex].style.display = "flex"; // Afficher la précédente
-        resetVersesColor(); // Réinitialiser les couleurs
-    }
+  questions[currentIndex].style.display = "none"; // Cacher l'actuelle
+  currentIndex = getRandomIndex(); // Obtenir un index aléatoire
+  questions[currentIndex].style.display = "flex"; // Afficher la nouvelle
+  resetVersesColor(); // Réinitialiser les couleurs
 });
