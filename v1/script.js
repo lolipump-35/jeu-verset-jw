@@ -22,25 +22,27 @@ function resetVersesColor() {
 }
 
 verses.forEach((verse) => {
-    verse.addEventListener("click", function () {
-        const verseQuestion = parseInt(this.getAttribute("data-question"));
-        const textDiv = this.querySelector(".text");
+  verse.addEventListener("click", function () {
+      const verseQuestion = parseInt(this.getAttribute("data-question"));
+      const textDiv = this.querySelector(".text");
 
-        // Vérifie si le verset est lié à la question actuelle
-        if (verseQuestion === currentIndex) {
-            this.style.backgroundColor = "rgb(155, 230, 177)"; // Bonne réponse (vert)
-        } else {
-            this.style.backgroundColor = "rgb(230, 104, 93)"; // Mauvaise réponse (rouge)
-        }
-
-        // Vérifie l'état de data-open pour afficher ou cacher le texte
-        if (textDiv) {
-            const isOpen = this.getAttribute("data-open") === "true";
-            this.setAttribute("data-open", isOpen ? "false" : "true");
-            textDiv.style.display = isOpen ? "none" : "block";
-        }
-    });
+      if (!this.hasAttribute("data-colored")) {
+          // **Premier clic → Change uniquement la couleur**
+          if (verseQuestion === currentIndex) {
+              this.style.backgroundColor = "rgb(155, 230, 177)"; // Bonne réponse (vert)
+          } else {
+              this.style.backgroundColor = "rgb(230, 104, 93)"; // Mauvaise réponse (rouge)
+          }
+          this.setAttribute("data-colored", "true"); // Marque comme coloré
+      } else if (textDiv) {
+          // **Deuxième clic → Affiche ou cache le texte**
+          textDiv.style.display = textDiv.style.display === "none" ? "block" : "none";
+      }
+  });
 });
+
+
+
 
 // Fonction pour obtenir un index aléatoire différent de l'actuel
 function getRandomIndex() {
