@@ -19,27 +19,27 @@ function resetVersesColor() {
 }
 
 verses.forEach((verse) => {
-  verse.addEventListener("click", function () {
+    verse.addEventListener("click", function () {
       const verseQuestion = parseInt(this.getAttribute("data-question"));
-
+  
       // Vérifie si le verset est lié à la question actuelle
       if (verseQuestion === currentIndex) {
-          this.style.backgroundColor = "#9BE6B1"; // Nouvelle couleur verte
+        this.style.backgroundColor = "green"; // Bonne réponse
       } else {
-          this.style.backgroundColor = "#E6685D"; // Nouvelle couleur rouge
+        this.style.backgroundColor = "red"; // Mauvaise réponse
       }
-
+  
       // Vérifie si la couleur du verset a changé
       const bgColor = this.style.backgroundColor;
-      if (bgColor === "rgb(155, 230, 177)" || bgColor === "rgb(230, 104, 93)") {
-          const textDiv = this.querySelector(".text"); // Récupère l'élément .text
-          if (textDiv) {
-              textDiv.style.display = textDiv.style.display === "none" ? "block" : "none"; // Affiche ou cache le texte
-          }
+      if (bgColor === "green" || bgColor === "red") {
+        const textDiv = this.querySelector(".text"); // Récupère l'élément .text
+        if (textDiv) {
+          textDiv.style.display = textDiv.style.display === "none" ? "block" : "none"; // Affiche ou cache le texte
+        }
       }
+    });
   });
-});
-
+  
 
 // Fonction pour obtenir un index aléatoire différent de l'actuel
 function getRandomIndex() {
