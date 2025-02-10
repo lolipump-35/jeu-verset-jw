@@ -21,6 +21,14 @@ function resetVersesColor() {
   });
 }
 
+// Fonction pour cacher le text quand on passe a une question suivante//
+function resetVerseText() {
+  const textreset = document.querySelectorAll(".text");
+  textreset.forEach((text) =>{
+    text.style.display = "none"
+  });
+}
+
 verses.forEach((verse) => {
   verse.addEventListener("click", function () {
     const verseQuestion = parseInt(this.getAttribute("data-question"));
@@ -66,6 +74,7 @@ button2.addEventListener("click", function () {
   currentIndex = getRandomIndex(); // Obtenir un index aléatoire
   questions[currentIndex].style.display = "flex"; // Afficher la nouvelle
   resetVersesColor(); // Réinitialiser les couleurs
+  resetVerseText();
 });
 
 // Bouton pour reculer (vers une autre question aléatoire)
@@ -74,4 +83,9 @@ button1.addEventListener("click", function () {
   currentIndex = getRandomIndex(); // Obtenir un index aléatoire
   questions[currentIndex].style.display = "flex"; // Afficher la nouvelle
   resetVersesColor(); // Réinitialiser les couleurs
+  resetVerseText();
 });
+
+
+/// Fonctionnalité du jeu un fois lancer///
+
